@@ -1,0 +1,31 @@
+name: Deploy to Xserver (develop)
+
+on:
+  push:
+    branches: [ develop ]  # developブランチにpushされたら実行
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # もしビルドが必要な場合はここで指定（例: npm run build）
+      # - name: Build
+      #   run: |
+      #     npm ci
+      #     npm run build
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist   
+          server-dir: ${{ secrets.FTP_TARGET }}
+          protocol: ftps
+          exclude: |
+            **/.git*
+            **/node_modules/**
+            **/.DS_Store
