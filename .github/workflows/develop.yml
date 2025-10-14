@@ -2,30 +2,46 @@ name: Deploy to Xserver (develop)
 
 on:
   push:
-    branches: [ develop ]  # developブランチにpushされたら実行
+    branches: [ develop ]
 
 jobs:
   ftp-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      # もしビルドが必要な場合はここで指定（例: npm run build）
-      # - name: Build
-      #   run: |
-      #     npm ci
-      #     npm run build
+      # 必要な場合は Node をセットアップ（静的サイトなら省略可）
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
+      # ここでビルド（dist を生成）
+      - name: Install & Build
+        run: |
+          if [ -f package-lock.json ] || [ -f package.json ]; then
+            npm ci
+            npm run build
+          else
+            echo "No package.json found. Skipping build."
+          fi
+
+      # FTPS デプロイ
       - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy@v4.3.6
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist   
-          server-dir: ${{ secrets.FTP_TARGET }}
           protocol: ftps
+          port: 21
+          local-dir: ./dist/                      # 生成物をアップ
+          server-dir: ${{ secrets.FTP_TARGET }}   # 末尾 / 必須
           exclude: |
             **/.git*
             **/node_modules/**
+            **/.github/**
             **/.DS_Store
+          # 初回は dry-run: true で差分のみ確認してから実行推奨
+          # dry-run: true
