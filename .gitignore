@@ -22,5 +22,8 @@ yarn-error.log*
 assets/css/style.css
 src/scss/style.css
 
+**/index-templa.html
+
+
 # Workflows は除外しない
 !.github/
