@@ -158,7 +158,7 @@
                 margin-bottom: 50px;
             }
             .font-sm {
-                font-size: 1.375rem;
+                font-size: 1.625rem;
                 letter-spacing: -0.02em;
                 @media (min-width: g.$desktop-breakpoint-md) {
                     font-size: 3.375rem;
@@ -173,7 +173,7 @@
             font-size: 14px;
             text-align: center;
             //letter-spacing: 2.2;
-            line-height: 2.2;
+            line-height: 2.5;
             @media (min-width: g.$desktop-breakpoint-md) {
                 font-size: 18px;
             }
@@ -394,6 +394,8 @@
     }
     .p-section__title-work {
         margin-bottom: 30px;
+        display: inline-flex;
+        flex-flow: column;
         @media (min-width: g.$desktop-breakpoint-md) {
             margin-right: 40px;
             margin-bottom: 0;
@@ -406,7 +408,9 @@
             position: relative;
             line-height: 1;
             padding: 15px 15px 18px;
+            width: 120px;
             @media (min-width: g.$desktop-breakpoint-md) {
+                width: 145px;
                 font-weight: 400;
                 font-size: 1.375rem;
                 padding: 15px 15px 18px;
@@ -549,7 +553,7 @@
         background-repeat: no-repeat;
         width: 100%;
         height: 100%;
-        padding: 115px 0 90px;
+        padding: 50px 0 90px;
         @media (min-width: g.$desktop-breakpoint-md) {
             background-image: url(/assets/img/top/interview_bg_section.svg);
             background-position: center bottom;
@@ -564,7 +568,7 @@
 
     
     .title-interview-headding {
-        margin-bottom: 45px;
+        margin-bottom: 10px;
         @media (min-width: g.$desktop-breakpoint-md) {
             display: flex;
             align-items: flex-end;
@@ -580,15 +584,16 @@
             flex-flow: row;            
         }
         .text-jp {
-            display: inline-block;
+            display: block;
             font-weight: 300;
             font-size: 1.0625rem;
             color: #333333;
             position: relative;
             line-height: 1;
             padding: 15px 15px 18px;
-            width: auto;
+            width: 210px;
             @media (min-width: g.$desktop-breakpoint-md) {
+                width: 255px;
                 font-weight: 400;
                 font-size: 1.375rem;
                 padding: 15px 15px 18px;
@@ -655,10 +660,14 @@
         position: relative;
         z-index: 10;
         box-shadow: 7.49px 7.49px 11.23px 2.25px rgba(89, 89, 89, 0.25);
+        transition: all 0.3s ease;
         @media (min-width: g.$desktop-breakpoint-md) {
             box-shadow: 10px 10px 15px 3px rgba(89, 89, 89, 0.25);
+            &:hover {
+                box-shadow: 0px 4px 4px 0px rgba(#000000, 0.25);
+            }
         }
-
+        
         a {
             display: block;
             position: relative;
@@ -848,9 +857,9 @@
     .p-interview__arrow:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
 
     .p-interview__arrow.swiper-button-disabled {
-        visibility: hidden;
-        pointer-events: none;
-        opacity: 0;
+        //visibility: hidden;
+        //pointer-events: none;
+        //opacity: 0;
     }
 
     /* 低モーション配慮 */
@@ -881,6 +890,8 @@
     }
     .p-section__title-data {
         margin-bottom: 30px;
+        display: inline-flex;
+        flex-flow: column;
         @media (min-width: g.$desktop-breakpoint-md) {
             margin-right: 40px;
             margin-bottom: 0;
@@ -893,7 +904,9 @@
             position: relative;
             line-height: 1;
             padding: 15px 15px 18px;
+            width: 171px; //+35
             @media (min-width: g.$desktop-breakpoint-md) {
+                width: 211px;
                 font-weight: 400;
                 font-size: 1.375rem;
                 padding: 15px 15px 18px;
@@ -1041,12 +1054,25 @@
         background-repeat: no-repeat;
         width: 100%;
         height: 100%;
-        padding: 115px 0 90px;
+        padding: 50px 0 90px;
+        position: relative;
         @media (min-width: g.$desktop-breakpoint-md) {
             background-image: url(/assets/img/top/environment_bg_section.svg);
             background-position: center top;
             padding: 95px 0 0;
         }
+
+        &::after {
+            content: "";
+            background-color: #ffffff;
+            width: 100%;
+            height: 200px;
+            bottom: 0;
+            position: absolute;
+            left: 0;
+        }
+
+
 
         .p-section__inner {
             width: 100%;
@@ -1065,6 +1091,8 @@
     }
     .p-section__title-environment {
         margin-bottom: 30px;
+        display: inline-flex;
+        flex-flow: column;
         @media (min-width: g.$desktop-breakpoint-md) {
             margin-right: 40px;
             margin-bottom: 0;
@@ -1077,7 +1105,9 @@
             position: relative;
             line-height: 1;
             padding: 15px 15px 18px;
+            width: 103px;
             @media (min-width: g.$desktop-breakpoint-md) {
+                width: 123px;
                 font-weight: 400;
                 font-size: 1.375rem;
                 padding: 15px 15px 18px;
@@ -1142,56 +1172,136 @@
 
         }
 
-        &__item-inner {
-            text-decoration: none;
+    }
 
-            .p-environment__item-img {
-                position: relative;
-                border-radius: 10px;
-                overflow: hidden;
+    .p-environment__item-inner {
+    text-decoration: none;
+    position: relative;
+    display: block;
 
-                &::before {
-                    content: "";
-                    display: block;
-                    padding-top: calc(181 / 320 * 100%);
-                }
+    // ------- 画像部分 -------
+    .p-environment__item-img {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
 
-                img {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                    display: block;
-                    object-fit: cover;
-                    object-position: center;
-                    transition: transform .25s ease;
-                }
-
-                @supports (aspect-ratio: 1 / 1) {
-                    aspect-ratio: 320 / 181;
-                    &::before { display: none; }
-                    img { position: absolute; }
-                }
-
-            }
+        &::before {
+        content: "";
+        display: block;
+        padding-top: calc(181 / 320 * 100%);
         }
 
-        &__title {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #333333;
-            border-bottom: solid 1px #003C81;
-            padding: 25px 50px 25px 0;
-            position: relative;
-            width: 100%;
-           
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            @media (min-width: g.$desktop-breakpoint-md) {
-                font-size: 1.125rem;
-                padding: 35px 60px 35px 0;
+        img {
+        position: relative;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center;
+        transition: transform .25s ease;
+        }
+
+        @supports (aspect-ratio: 1 / 1) {
+        aspect-ratio: 320 / 181;
+        &::before { display: none; }
+        img { position: absolute; }
+        }
+
+        // 画像オーバーレイ（初期透明）
+        &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: rgba(255, 255, 255, 0);
+        transition: background-color .3s ease;
+        pointer-events: none;
+        }
+    }
+
+    // ------- タイトル部分（二重レイヤー方式） -------
+    .p-environment__title {
+        position: relative;
+        padding: 25px 50px 25px 0;
+        border-bottom: 1px solid #003C81;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font-size: 1rem;
+        font-weight: 400;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            padding: 35px 60px 35px 0;
+            font-size: 1.125rem;
+        }
+
+        // 下層・上層の共通
+        .p-environment__title-layer {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        }
+
+        // 右端アイコン（絶対配置する場合）
+        .p-environment-ico-arrow {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        }
+
+        // 上層（白）オーバーレイ
+        .p-environment__title-layer--overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        color: #fff;          // 文字は白
+        opacity: 0;           // 初期は非表示
+        pointer-events: none; // クリック邪魔しない
+        transition: opacity .3s ease;
+
+        .p-environment-ico-arrow path {
+            stroke: #fff;
+            fill: #fff;
+        }
+        }
+    }
+
+    // ------- hover時まとめ -------
+    &:hover {
+        // 画像は白0.15をかぶせる
+        .p-environment__item-img::after {
+        background-color: rgba(255, 255, 255, .15);
+        }
+
+        // タイトルは“白の複製レイヤー”を0.15だけ見せる
+        .p-environment__title .p-environment__title-layer--overlay {
+        opacity: .15;
+        }
+
+        .p-environment__item-img img {
+        // transform: scale(1.03);
+        }
+    }
+    }
+
+    .p-environment__item-inner {
+
+        .p-environment__item-img {
+            // 疑似要素で白レイヤーを重ねる
+            
+        }
+
+         &__title {
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-color: rgba(255, 255, 255, 0); // 初期は透明
+                transition: background-color 0.3s ease;
+                pointer-events: none;
             }
 
             svg {
@@ -1207,24 +1317,50 @@
                 }
             }
         }
+
+        // hover時に白の0.15をかぶせる
+        &:hover .p-environment__item-img::after {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+
     }
 
     .p-roundtable {
-        width: 100%;
-        background-image: url(/assets/img/top/roundtable_bg.svg);
-        background-size: cover;
-        background-position: center top;
-        background-repeat: no-repeat;
+        position: relative;
+        overflow: hidden;
         width: 100%;
         height: 100%;
-        position: relative;
         box-sizing: border-box;
         border-radius: 10px;
-        overflow: hidden;
+        background: none;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: url(/assets/img/top/roundtable_bg.svg);
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        > * {
+            position: relative;
+            z-index: 1;
+        }
+
         @media (min-width: g.$desktop-breakpoint-md) {
+            &::before {
             background-image: url(/assets/img/top/roundtable_bg.svg);
             background-position: left top;
-           
+            }
         }
 
         &__content {
@@ -1285,7 +1421,9 @@
                 position: relative;
                 line-height: 1;
                 padding: 15px 15px 18px;
+                width: 86px;
                 @media (min-width: g.$desktop-breakpoint-md) {
+                    width: auto;
                     font-weight: 400;
                     font-size: 1.375rem;
                     padding: 15px 15px 18px;
@@ -1399,6 +1537,7 @@
         display: block;
         position: relative;
         text-decoration: none;
+        background-color: transparent;
         @media (min-width: g.$desktop-breakpoint-md) {
             width: calc(100% - 80px);
             margin-top: 190px;
@@ -1475,6 +1614,7 @@
             color: g.$white;
             font-weight: 400;
             font-size: 0.875rem;
+            line-height: 2;
             @media (min-width: g.$desktop-breakpoint-md) {
                 font-size: 1rem;
             }
@@ -1573,14 +1713,16 @@
             margin-bottom: 0;
         }
         .text-jp {
-            display: inline-block;
+            display: block;
             font-weight: 300;
             font-size: 1.0625rem;
             color: #333333;
             position: relative;
             line-height: 1;
             padding: 15px 15px 18px;
+            width: 154px;
             @media (min-width: g.$desktop-breakpoint-md) {
+                width: 189px;
                 font-weight: 400;
                 font-size: 1.375rem;
                 padding: 15px 15px 18px;
@@ -1641,7 +1783,7 @@
             overflow: hidden;
             border-bottom: solid 1px #BCC2CB;
             &.is-open .p-faq__question {
-                color: #003C81;
+                //color: #003C81;
             }
         }
 
@@ -1714,7 +1856,7 @@
             transition: height .28s ease;
             will-change: height;
             @media (min-width: g.$desktop-breakpoint-md) {
-                padding-left: 93px;
+                padding-left: 106px;
                 padding-right: 93px;
                 box-sizing: border-box;
             }

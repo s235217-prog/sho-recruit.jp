@@ -475,3 +475,40 @@ window.addEventListener('load', function () {
     document.fonts.ready.then(() => ScrollTrigger.refresh());
   }
 });
+
+// ===============================
+// Header glassmorphism on scroll
+// ===============================
+(function () {
+  var header = document.querySelector('.site-header');
+  if (!header) return;
+
+  // 何pxスクロールしたら発火するか（調整可）
+  var THRESHOLD = 8;
+
+  function applyHeaderBlur() {
+    if (window.scrollY > THRESHOLD) {
+      header.classList.add('is-blur');
+    } else {
+      header.classList.remove('is-blur');
+    }
+  }
+
+  // 初期化 & スクロールで反映
+  applyHeaderBlur();
+  window.addEventListener('scroll', applyHeaderBlur, { passive: true });
+
+  // モバイルメニュー開閉時は常に読みやすい背景に（任意）
+  var hamburger = document.querySelector('.hamburger');
+  if (hamburger) {
+    hamburger.addEventListener('click', function () {
+      var expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      // トグル後の状態を反映
+      var willOpen = !expanded;
+      hamburger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      header.classList.toggle('is-menu-open', willOpen);
+      // メニューを閉じたらスクロール状態の見た目に戻す
+      if (!willOpen) applyHeaderBlur();
+    });
+  }
+})();

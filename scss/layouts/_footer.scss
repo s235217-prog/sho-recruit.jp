@@ -222,6 +222,24 @@
                     margin-right: 0;
                     font-size: 1.1875rem;
                 }
+
+                &:after {
+                    transition: all ease-in 0.3s;
+                    content: "";
+                    background-color: rgba(g.$white ,0);
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                }    
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    &:hover {
+                        &:after {
+                            background-color: rgba(g.$white ,0.15);
+                        }    
+                    }
+                }
             }
     }
 
