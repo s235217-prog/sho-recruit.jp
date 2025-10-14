@@ -11,23 +11,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 必要な場合は Node をセットアップ（静的サイトなら省略可）
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      # ここでビルド（dist を生成）
-      - name: Install & Build
-        run: |
-          if [ -f package-lock.json ] || [ -f package.json ]; then
-            npm ci
-            npm run build
-          else
-            echo "No package.json found. Skipping build."
-          fi
-
-      # FTPS デプロイ
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
@@ -36,12 +19,18 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
-          local-dir: ./dist/                      # 生成物をアップ
-          server-dir: ${{ secrets.FTP_TARGET }}   # 末尾 / 必須
-          exclude: |
+          local-dir: ./                                # ← リポジトリ直下をそのまま
+          server-dir: ${{ secrets.FTP_TARGET }}        # 末尾 / 必須
+          exclude: |                                   # 不要物は除外
             **/.git*
             **/node_modules/**
             **/.github/**
             **/.DS_Store
-          # 初回は dry-run: true で差分のみ確認してから実行推奨
-          # dry-run: true
+            **/src/**                # SCSSや開発用ソースがあれば
+            **/*.map
+            **/*.psd
+            **/*.ai
+            **/*.sketch
+            **/*.fig
+            **/*.README.md
+            **/*.gitignore
