@@ -32,5 +32,5 @@ jobs:
             **/*.ai
             **/*.sketch
             **/*.fig
-            **/*.README.md
+            **/*README.md
             **/*.gitignore
