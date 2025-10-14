@@ -34,3 +34,6 @@ jobs:
             **/*.fig
             **/*README.md
             **/*.gitignore
+            **/*.mp4
+            **/*.mov
+            **/*.zip
