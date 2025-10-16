@@ -8,6 +8,7 @@
   transition: background-color .3s ease, box-shadow .3s ease, border-color .3s ease, backdrop-filter .3s ease;
   background-color: transparent;
   border-bottom: 1px solid transparent;
+  overflow-x: clip;
   //background-color: rgba(g.$white ,0.3);
 
   &.is-blur {

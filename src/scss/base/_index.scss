@@ -1,6 +1,7 @@
 // 共通スタイル
 @use "../utils/variables" as g;
 @use "../utils/mixin" as m;
+@use "sass:math";
 
 :root {
   --fs-body: clamp(0.875rem, 0.8125rem + 0.3vw, 1rem); // 14px〜16px
@@ -27,8 +28,10 @@ body {
     
 }
 
-@function rem($px, $base: 16) {
-  @return ($px / $base) * 1rem;
+@function rem($px, $base: 16px) {
+  $px-n: if(math.is-unitless($px), $px * 1px, $px);
+  $base-n: if(math.is-unitless($base), $base * 1px, $base);
+  @return math.div($px-n, $base-n) * 1rem;
 }
 
 /* 2) 使い方（例） */

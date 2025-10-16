@@ -187,6 +187,36 @@
     window.SHO.interviewSwiper = swiper;
   }
 
+  // ========= 3) Interview Swiper =========
+  function initInterviewSwiper() {
+    var el = document.querySelector('.js-page-interview-swiper');
+    if (!el || typeof Swiper === 'undefined') return;
+
+    var swiper = new Swiper('.js-page-interview-swiper', {
+      slidesPerView: 'auto',       // ← ここを変更
+      spaceBetween: 30,
+      centeredSlides: false,
+      loop: false,
+      watchOverflow: true,
+      grabCursor: true,
+      speed: 500,
+      resistanceRatio: 0.85,
+      slidesPerGroup: 1,
+      navigation: {
+        nextEl: document.querySelector('.js-interview-footer-slider-next') || null,
+        prevEl: document.querySelector('.js-interview-footer-slider-prev') || null
+      },
+      a11y: { enabled: true },
+      keyboard: { enabled: true },
+      breakpoints: {
+        768: {
+          spaceBetween: 24
+        }
+      }
+    });
+    window.SHO.interviewSwiper = swiper;
+  }
+
   // ========= 4) FAQ アコーディオン =========
   function initFaqAccordion(){
     var items = document.querySelectorAll('.p-faq__item');
@@ -424,9 +454,15 @@ window.addEventListener('load', function () {
   });
 
   // --- 見出しマスク連動（roundtable除外） ---
-  gsap.utils.toArray(
-    '.title-work-headding, .title-interview-headding, .title-data-headding, .title-environment-headding, .title-faq-headding'
-  ).forEach((wrap) => {
+  gsap.utils.toArray(`
+  .title-work-headding,
+  .title-interview-headding,
+  .title-data-headding,
+  .title-environment-headding,
+  .title-faq-headding,
+  .title-schedule-headding,
+  .title-interview-career-headding
+`).forEach((wrap) => {
     const jpList = wrap.querySelectorAll('.text-jp');
     const enList = wrap.querySelectorAll('.text-en');
 
