@@ -35,7 +35,52 @@
         position: absolute;
         z-index: 2;
         will-change: transform;
+        &.bg-parts-l-top-01 {
+             position: absolute;
+            display: none;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                display: block;
+                width: 61px;
+                top: 10%;
+                left: 4%;
+            }
+        }
+
+        &.bg-parts-r-top-01 {
+             position: absolute;
+             display: none;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                display: block;
+                width: 5px;
+                top: 18%;
+                right: 6%;
+            }
+        }
+
+        &.bg-parts-l-top-02 {
+             position: absolute;
+            display: none;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                display: block;
+                width: 61px;
+                top: 60%;
+                left: 4%;
+            }
+        }
+
+        &.bg-parts-r-top-02 {
+             position: absolute;
+             display: none;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                display: block;
+                width: 5px;
+                top: 68%;
+                right: 6%;
+            }
+        }
+
         &.bg-parts-l-01 {
+             position: absolute;
             display: none;
             @media (min-width: g.$desktop-breakpoint-md) {
                 display: block;
@@ -46,6 +91,7 @@
         }
 
         &.bg-parts-r-01 {
+             position: absolute;
              display: none;
             @media (min-width: g.$desktop-breakpoint-md) {
                 display: block;
@@ -56,6 +102,7 @@
         }
 
         &.bg-parts-l-02 {
+             position: absolute;
             display: none;
             @media (min-width: g.$desktop-breakpoint-lg) {
                 display: block;
@@ -66,6 +113,7 @@
         }
 
         &.bg-parts-r-02 {
+             position: absolute;
             display: none;
             @media (min-width: g.$desktop-breakpoint-lg) {
                 display: block;
@@ -76,6 +124,7 @@
         }
         
         &.bg-parts-r-03 {
+             position: absolute;
             display: none;
             @media (min-width: g.$desktop-breakpoint-lg) {
                 width: 5px;
@@ -85,6 +134,7 @@
         }
 
         &.bg-parts-l-03 {
+             position: absolute;
             display: none;
             @media (min-width: g.$desktop-breakpoint-lg) {
                 display: block;
@@ -95,6 +145,7 @@
         }
 
         &.bg-parts-r-04 {
+             position: absolute;
             display: none;
             @media (min-width: g.$desktop-breakpoint-lg) {
                 display: block;
@@ -105,6 +156,7 @@
         }
         
         &.bg-parts-r-05 {
+             position: absolute;
             display: none;
              z-index: 3;             
             @media (min-width: g.$desktop-breakpoint-lg) {
@@ -116,6 +168,7 @@
         }
 
         &.bg-parts-r-01-sp {
+             position: absolute;
             width: 27px;
             bottom: -12%;
             right: 4%;
@@ -125,6 +178,7 @@
         }
 
         &.bg-parts-r-02-sp {
+             position: absolute;
             width: 2px;
             bottom: -4%;
             right: 6%;
@@ -134,6 +188,7 @@
         }
 
         &.bg-parts-l-01-sp {
+             position: absolute;
             width: 12px;
             bottom: -6%;
             left: 4%;
@@ -143,6 +198,7 @@
         }
 
         &.bg-parts-r-03-sp {
+             position: absolute;
             width: 2px;
             bottom: -8%;
             right: 4%;
@@ -152,6 +208,7 @@
         }
 
         &.bg-parts-l-02-sp {
+             position: absolute;
             width: 12px;
             bottom: -2%;
             left: 4%;
@@ -161,6 +218,7 @@
         }
 
         &.bg-parts-l-03-sp {
+             position: absolute;
             width: 12px;
             bottom: 1%;
             left: 4%;
@@ -171,6 +229,7 @@
         }
 
          &.bg-parts-r-04-sp {
+             position: absolute;
             width: 2px;
             bottom: -4%;
             right: 4%;
