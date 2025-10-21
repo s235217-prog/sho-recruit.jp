@@ -10,6 +10,18 @@
     width: 100%;
   }
 
+  &.breadcrumb-wrap-01 {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    z-index: 10;
+    @media (min-width: g.$desktop-breakpoint-md) {
+      left: 8%;
+      top: 265px;
+      bottom: auto;
+    }
+  }
+
   &.breadcrumb-wrap-02 {
     position: absolute;
     left: 20px;
@@ -19,7 +31,6 @@
       left: 20px;
       top: 10px;
     }
-
   }
 
 }
@@ -54,9 +65,7 @@
     &[aria-current="page"] {
       pointer-events: none;
       font-weight: 500;
-      font-size: 0.75rem;
       color: #274374;
-      
     }
   }
 

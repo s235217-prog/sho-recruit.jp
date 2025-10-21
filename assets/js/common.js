@@ -461,7 +461,7 @@ window.addEventListener('load', function () {
   .title-environment-headding,
   .title-faq-headding,
   .title-schedule-headding,
-  .title-interview-career-headding
+  .title-interview-career-headding,
 `).forEach((wrap) => {
     const jpList = wrap.querySelectorAll('.text-jp');
     const enList = wrap.querySelectorAll('.text-en');
@@ -547,4 +547,254 @@ window.addEventListener('load', function () {
       if (!willOpen) applyHeaderBlur();
     });
   }
+})();
+
+////WORKS NAV
+// ===== Side Nav Active + Parent Highlight + Smooth Scroll (PC only) =====
+(function () {
+  const PC_BP = 768;
+  if (window.innerWidth < PC_BP) return;
+
+  const sideNav = document.querySelector('.side-nav');
+  if (!sideNav) return;
+
+  // 固定ヘッダー
+  const SP_H = 55;
+  const PC_H = 125;
+  const getOffset = () => (window.innerWidth >= PC_BP ? PC_H : SP_H);
+
+  // 監視対象ID（HTMLと同じ順に並べる）
+  const TARGET_IDS = [
+    'section01',
+    'pmcm',
+    'mansion',
+    'infra',
+    'flow',
+    'flow01',
+    'flow02',
+    'flow03',
+    'flow04',
+    'flow05',
+    'flow06'
+  ];
+
+  // a要素の取得（クラス有無に関わらず # から始まるもの）
+  const links = Array.from(sideNav.querySelectorAll('a[href^="#"]'));
+  if (!links.length) return;
+
+  // id -> section, id -> link の対応表
+  const sectionById = new Map();
+  const linkById = new Map();
+  TARGET_IDS.forEach(id => {
+    const sec = document.getElementById(id);
+    const lnk = sideNav.querySelector(`a[href="#${id}"]`);
+    if (sec) sectionById.set(id, sec);
+    if (lnk) linkById.set(id, lnk);
+  });
+
+  // 親グループ（親 → 子ID配列）
+  const parentGroups = [
+    {
+      parentLink: sideNav.querySelector('.side-nav-title-01 a'),
+      children: ['pmcm', 'mansion', 'infra']
+    },
+    {
+      parentLink: sideNav.querySelector('.side-nav-title-02 a'),
+      children: ['flow01', 'flow02', 'flow03', 'flow04', 'flow05', 'flow06']
+    }
+  ];
+
+  // is-active の付替え（排他的）
+  function clearAllActive() {
+    links.forEach(a => a.classList.remove('is-active'));
+  }
+  function setActiveById(id) {
+    const link = linkById.get(id);
+    if (!link) return;
+    clearAllActive();
+    link.classList.add('is-active');
+
+    // 親タイトルの付与
+    parentGroups.forEach(({ parentLink, children }) => {
+      if (!parentLink) return;
+      if (children.includes(id)) parentLink.classList.add('is-active');
+      else parentLink.classList.remove('is-active');
+    });
+  }
+
+  // スムーススクロール
+  function smoothScrollTo(el) {
+    const rect = el.getBoundingClientRect();
+    const y = rect.top + (window.pageYOffset || 0) - getOffset();
+    window.scrollTo({ top: Math.max(y, 0), left: 0, behavior: 'smooth' });
+  }
+
+  // クリック（アンカー）対応
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    const href = a.getAttribute('href');
+    if (href === '#') return;
+
+    const id = href.slice(1);
+    const target = sectionById.get(id);
+    if (!target) return;
+
+    e.preventDefault();
+    setActiveById(id);
+    smoothScrollTo(target);
+    history.pushState(null, '', `#${id}`);
+  });
+
+  // IO: 早めに反応＆背面でのチラつき抑止
+  const io = new IntersectionObserver(
+    entries => {
+      // 「最も中心に近い」または「最も可視割合が高い」エントリを採用
+      let best = null;
+      let bestScore = -Infinity;
+
+      entries.forEach(entry => {
+        if (entry.intersectionRatio <= 0) return;
+
+        const rect = entry.boundingClientRect;
+        const centerDelta = Math.abs(rect.top + rect.height / 2 - (window.innerHeight / 2));
+        // スコア: 可視割合優先 + 中心に近いほど加点
+        const score = entry.intersectionRatio * 1000 - centerDelta;
+
+        if (score > bestScore) {
+          bestScore = score;
+          best = entry;
+        }
+      });
+
+      if (best) {
+        const id = best.target.getAttribute('id');
+        if (id) setActiveById(id);
+      }
+    },
+    {
+      root: null,
+      // 上: ヘッダー分手前で反応 / 下: だいぶ手前で切る（セクション短い場合にも強い）
+      rootMargin: `-${getOffset()}px 0px -60% 0px`,
+      threshold: buildThresholds()
+    }
+  );
+
+  // しっかり多段階で監視
+  function buildThresholds() {
+    const ts = [];
+    for (let i = 0; i <= 10; i++) ts.push(i / 10);
+    return ts;
+  }
+
+  // 監視開始
+  TARGET_IDS.forEach(id => {
+    const sec = sectionById.get(id);
+    if (sec) io.observe(sec);
+  });
+
+  // フォールバック（保険）：スクロール中に一番近いセクションを拾う
+  // まれにIOが拾い損ねるケース（mansionだけ等）に備える
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = (window.pageYOffset || 0) + getOffset() + 1;
+      let nearestId = null;
+      let nearestDelta = Infinity;
+
+      TARGET_IDS.forEach(id => {
+        const sec = sectionById.get(id);
+        if (!sec) return;
+        const top = sec.getBoundingClientRect().top + (window.pageYOffset || 0);
+        const delta = Math.abs(top - y);
+        if (delta < nearestDelta) {
+          nearestDelta = delta;
+          nearestId = id;
+        }
+      });
+
+      if (nearestId) setActiveById(nearestId);
+      ticking = false;
+    });
+  }, { passive: true });
+
+  // ハッシュ遷移・初期位置補正
+  function jumpFixFromHash() {
+    const id = (location.hash || '').replace('#','');
+    if (!id) return;
+    const sec = sectionById.get(id);
+    if (sec) setTimeout(() => smoothScrollTo(sec), 0);
+  }
+  window.addEventListener('hashchange', jumpFixFromHash);
+  window.addEventListener('load', jumpFixFromHash);
+})();
+
+
+// ===== Smooth anchor scroll with fixed header offset =====
+(function () {
+  var PC_BP = 768;        // PC判定
+  var SP_H = 55;          // SPヘッダー高さ
+  var PC_H = 135;         // PCヘッダー高さ
+
+  // 現在のオフセット(px)
+  function getOffset() {
+    return (window.innerWidth >= PC_BP) ? PC_H : SP_H;
+  }
+
+  // 対象要素へスムーススクロール（オフセット反映）
+  function scrollToTarget(el) {
+    if (!el) return;
+    var rect = el.getBoundingClientRect();
+    var current = window.pageYOffset || document.documentElement.scrollTop || 0;
+    var targetY = rect.top + current - getOffset();
+
+    window.scrollTo({
+      top: Math.max(targetY, 0),
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  // クリックでのページ内リンク処理
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+
+    var href = a.getAttribute('href');
+    if (href === '#') return;
+
+    var id = decodeURIComponent(href).slice(1);
+    var target = document.getElementById(id);
+    if (!target) return;
+
+    e.preventDefault();
+    scrollToTarget(target);
+
+    // アドレスバーのハッシュは更新しておく（ページ履歴に残したくなければ replace に切替）
+    history.pushState(null, '', href);
+  });
+
+  // ハッシュ遷移（外部から来たとき／戻る・進む）にも対応
+  window.addEventListener('hashchange', function () {
+    var hash = decodeURIComponent(location.hash || '').replace('#', '');
+    if (!hash) return;
+    var target = document.getElementById(hash);
+    if (target) {
+      // デフォルトジャンプ後に位置補正（遅延してずらす）
+      setTimeout(function () { scrollToTarget(target); }, 0);
+    }
+  });
+
+  // 読み込み時にハッシュがある場合の補正
+  window.addEventListener('load', function () {
+    var hash = decodeURIComponent(location.hash || '').replace('#', '');
+    if (!hash) return;
+    var target = document.getElementById(hash);
+    if (target) {
+      // ブラウザの初期ジャンプ後に補正
+      setTimeout(function () { scrollToTarget(target); }, 0);
+    }
+  });
 })();
