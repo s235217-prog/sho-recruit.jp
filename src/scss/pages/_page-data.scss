@@ -1,0 +1,482 @@
+// 共通スタイル
+@use "../utils/variables" as g;
+@use "../utils/mixin" as m;
+
+//
+
+.p-section {
+
+}
+#data {
+    font-family: g.$font-noto-sans;
+    color: #333333;
+    //background: linear-gradient(to bottom, rgba(#F5F6F8, 0) 0%, #F5F6F8 100%);
+    position: relative;
+    .l-main {
+        position: relative;
+        padding-top: 100px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            
+        }
+    }
+
+    //キービジュアル
+    .page-sub-hero {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+        height: 321px;
+        background-image: url(/assets/img/data/kv_sp.webp);
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            background-image: url(/assets/img/data/kv_pc.webp);
+            height: 314px;
+            background-position: right top;
+        }
+    }
+
+    .page-sub-hero__titlebox {
+        position: absolute;
+        z-index: 5;
+        bottom: 55px;
+        left: 20px;
+        width: 100%;
+        max-width: 220px;
+        border-bottom: solid 1px #254574;
+        padding-bottom: 5px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            width: 446.5px;
+            top: 45px;
+            bottom: auto;
+            left: 8%;
+        }
+    }
+
+    .title-sub-page-sub-hero-headding {
+        display: inline-flex;
+        flex-flow: column;
+        position: relative;
+        .text-jp-hero {
+            display: inline-block;
+            font-weight: 500;
+            font-size: 0.75rem;
+            color: #333333;
+            position: relative;
+            line-height: 1;
+            padding: 15px 15px 18px 0;
+            width: 86px;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                width: auto;
+                font-size: 1.125rem;
+                padding: 15px 15px 18px 0;
+            }
+
+            &:before,
+            &:after {
+                content: "";
+                background-color: #BCC2CB;
+                width: 26px;
+                height: 26px;
+                position: absolute;
+            }
+
+            &:before {
+                height: 1px;
+                bottom: 10px;
+                right: 0;
+            }
+
+            &:after {
+                width: 1px;
+                bottom: 5px;
+                right: 5px;
+            }
+
+        }
+
+        .text-en-hero {
+            display: block;
+            font-family: g.$font-public-sans;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 2.375rem;
+            color: #954802;
+            background: linear-gradient(76deg, #691902 0%, #954802 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            line-height: 1;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                font-size: 2.625rem;
+            }
+        }
+    }
+
+    .p-data {
+        &__images {
+            display: grid;
+            gap: 24px; /* お好みで */
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "cell01"
+                "cell02"
+                "cell04"
+                "cell03"
+                "cell05"
+                "cell06"
+                "cell07";
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-areas:
+                    "cell01 cell03"
+                    "cell02 cell03"
+                    "cell04 cell05"
+                    "cell06 cell06"
+                    "cell07 cell07";
+                    align-items: stretch;
+                }
+
+            .cell-01 { grid-area: cell01; }
+            .cell-02 { grid-area: cell02; }
+            .cell-03 { grid-area: cell03; }
+            .cell-04 { grid-area: cell04; }
+            .cell-05 { grid-area: cell05; }
+            .cell-06 { grid-area: cell06; }
+            .cell-07 { grid-area: cell07; }
+
+
+            .grid-2col__cell {
+                border: solid 1px #BCC2CB;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 25px 0;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    padding: 35px 0;
+                }
+            }
+
+            // 右カラムを上下結合
+            > .grid-2col__cell--merge {
+                grid-column: auto;
+                grid-row: auto;
+                display: grid;
+                grid-template-rows: none;
+                gap: 20px;
+
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    grid-column: 2;
+                    grid-row: 1 / span 2;
+                    display: grid;
+                    //grid-template-rows: 1fr 1fr;     // 中に画像2枚を縦に均等割り
+                    gap: 55px;
+                }
+            }
+
+            .cell-06 {
+                display: grid;
+                grid-template-columns: repeat(1,1fr);
+                gap: 20px;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    grid-template-columns: repeat(2,1fr);
+                }
+            }
+
+            .cell-07 {
+                display: grid;
+                grid-template-columns: repeat(1,1fr);
+                gap: 20px;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    grid-template-columns: repeat(3,1fr);
+                }
+            }
+
+            /* 画像リセット */
+            > .grid-2col__cell img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+
+            .data-img-01 {
+                @include m.mx-auto;
+                width: 100%;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    width: 88%;
+                }
+            }
+
+            .data-img-02 {
+                @include m.mx-auto;
+                width: 100%;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    width: 91%;
+                }
+            }
+
+            .data-img-03 {
+                @include m.mx-auto;
+                width: 100%;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    width: 86%;
+                }
+            }
+
+            .data-img-04 {
+                @include m.mx-auto;
+                width: 100%;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    width: 87%;
+                }
+            }
+
+            .data-img-05 {
+                @include m.mx-auto;
+                width: 100%;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    width: 83%;
+                }
+            }
+
+            .data-img-06 {
+                @include m.mx-auto;
+                width: 100%;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    width: 86%;
+                }
+            }
+
+            .data-img-07 {
+                @include m.mx-auto;
+                width: 100%;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    width: 89%;
+                }
+            }
+
+            .data-img-08 {
+                @include m.mx-auto;
+                width: 100%;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    width: 76%;
+                }
+            }
+
+            .data-img-09 {
+                @include m.mx-auto;
+                width: 100%;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    width: 81%;
+                }
+            }
+
+            .data-img-10 {
+                @include m.mx-auto;
+                width: 100%;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    width: 81%;
+                }
+            }
+
+            .data-img-11 {
+                @include m.mx-auto;
+                width: 100%;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    width: 84%;
+                }
+            }
+        }
+        
+    }
+
+    //environment
+    .p-section--environment {
+        width: 100%;
+        height: 100%;
+        padding: 0 0 0;
+        position: relative;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            padding: 0 0 0;
+        }
+
+        .p-section__inner {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .p-environment {
+        &__cards {
+            display: grid;
+            grid-template-columns: repeat(1,1fr);
+            gap: 45px;
+            margin-bottom: 65px;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                grid-template-columns: repeat(3,1fr);
+                gap: 30px;
+                margin-bottom: 100px;
+            }
+        }
+
+        &__item {
+
+        }
+
+    }
+
+    .p-environment__item-inner {
+    text-decoration: none;
+    position: relative;
+    display: block;
+
+    // ------- 画像部分 -------
+    .p-environment__item-img {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+
+        &::before {
+        content: "";
+        display: block;
+        padding-top: calc(181 / 320 * 100%);
+        }
+
+        img {
+        position: relative;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center;
+        transition: transform .25s ease;
+        }
+
+        @supports (aspect-ratio: 1 / 1) {
+        aspect-ratio: 320 / 181;
+        &::before { display: none; }
+        img { position: absolute; }
+        }
+
+        // 画像オーバーレイ（初期透明）
+        &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-color: rgba(255, 255, 255, 0);
+        transition: background-color .3s ease;
+        pointer-events: none;
+        }
+    }
+
+    // ------- タイトル部分（二重レイヤー方式） -------
+    .p-environment__title {
+        position: relative;
+        padding: 25px 50px 25px 0;
+        border-bottom: 1px solid #003C81;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font-size: 1rem;
+        font-weight: 400;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            padding: 35px 60px 35px 0;
+            font-size: 1.125rem;
+        }
+
+        // 下層・上層の共通
+        .p-environment__title-layer {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        }
+
+        // 右端アイコン（絶対配置する場合）
+        .p-environment-ico-arrow {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        }
+
+        // 上層（白）オーバーレイ
+        .p-environment__title-layer--overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+        color: #fff;          // 文字は白
+        opacity: 0;           // 初期は非表示
+        pointer-events: none; // クリック邪魔しない
+        transition: opacity .3s ease;
+
+        .p-environment-ico-arrow path {
+            stroke: #fff;
+            fill: #fff;
+        }
+        }
+    }
+
+    // ------- hover時まとめ -------
+    &:hover {
+        // 画像は白0.15をかぶせる
+        .p-environment__item-img::after {
+        background-color: rgba(255, 255, 255, .15);
+        }
+
+        // タイトルは“白の複製レイヤー”を0.15だけ見せる
+        .p-environment__title .p-environment__title-layer--overlay {
+        opacity: .15;
+        }
+
+        .p-environment__item-img img {
+        // transform: scale(1.03);
+        }
+    }
+    }
+
+    .p-environment__item-inner {
+
+        .p-environment__item-img {
+            // 疑似要素で白レイヤーを重ねる
+            
+        }
+
+         &__title {
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-color: rgba(255, 255, 255, 0); // 初期は透明
+                transition: background-color 0.3s ease;
+                pointer-events: none;
+            }
+
+            svg {
+                width: 36px !important;
+                height: auto !important;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    width: 46px !important;
+                    height: auto !important;
+                }
+            }
+        }
+
+        // hover時に白の0.15をかぶせる
+        &:hover .p-environment__item-img::after {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+
+    }
+}
