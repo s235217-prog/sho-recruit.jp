@@ -500,6 +500,8 @@ window.addEventListener('load', function () {
   .title-schedule-headding,
   .title-free-addres-heading,
   .title-disaster-prevention-heading,
+  .title-photographs-heading,
+  .title-entry-form-heading,
   .title-interview-career-headding
 `).forEach((wrap) => {
     const jpList = wrap.querySelectorAll('.text-jp');
