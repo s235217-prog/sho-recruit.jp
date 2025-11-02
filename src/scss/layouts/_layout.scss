@@ -87,6 +87,16 @@
     }
   }
 
+   &.container-sm-box {
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 720px;
+    @media only screen and (min-width: g.$desktop-breakpoint-md) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
   &.px-sm-0 {
     padding-left: 0;
     padding-right: 0;
