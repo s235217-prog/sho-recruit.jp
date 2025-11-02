@@ -44,7 +44,7 @@
         bottom: 55px;
         left: 20px;
         width: 100%;
-        max-width: 220px;
+        max-width: 446.5px;
         border-bottom: solid 1px #254574;
         padding-bottom: 5px;
         @media (min-width: g.$desktop-breakpoint-md) {
@@ -67,7 +67,7 @@
             position: relative;
             line-height: 1;
             padding: 15px 15px 18px 0;
-            width: 86px;
+            width: auto;
             @media (min-width: g.$desktop-breakpoint-md) {
                 width: auto;
                 font-size: 1.125rem;
@@ -102,7 +102,7 @@
             font-family: g.$font-public-sans;
             font-style: italic;
             font-weight: 500;
-            font-size: 2.375rem;
+            font-size: 2.125rem;
             color: #954802;
             background: linear-gradient(76deg, #691902 0%, #954802 100%);
             -webkit-background-clip: text;
@@ -123,6 +123,205 @@
         margin-top: 50px;
         @media (min-width: g.$desktop-breakpoint-md) {
             margin-top: 130px;
+        }
+    }
+
+    //
+    .page-oss {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        padding-top: 60px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            padding-top: 100px;
+        }
+    }
+
+    .layout {
+        @include m.mx-auto;
+        width: 100%;
+        max-width: 1290px;
+        padding: 0 20px 30px;
+        box-sizing: border-box;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            //justify-content: space-between;
+            align-items: flex-start;
+            padding: 0 20px 100px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+
+    .side-menu {
+        width: 100%;
+        margin-bottom: 20px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            width: 40%;
+            padding-right: 30px;
+            box-sizing: border-box;
+        }
+        @media (min-width: g.$desktop-breakpoint-xl) {
+            width: 40%;
+            padding-right: 40px;
+            margin-bottom: 0;
+        }
+    }
+
+
+    .main-contents {
+        width: 100%;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 1;
+        gap: 15px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            width: 60%;
+            gap: 20px;
+        }
+    }
+
+    .title-section-oss {
+        position: relative;
+        font-size: 1.0625rem;
+        font-weight: 700;
+        color: #274374;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            font-size: 2.5rem;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .text {
+            position: relative;
+            z-index: 3;
+        }
+
+        &:before {
+            content: "";
+            width: 40px;
+            height: 1px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color: #004668;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                width: 100px;
+                height: 2px;
+            }
+        }
+
+        &:after {
+            content: "";
+            background-image: url(/assets/img/new-grads-roundtable/bg_title_contents_parts.webp);
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 101.29px;
+            height: 100px;
+            position: absolute;
+            left: -60px;
+            top: 5%;
+            transform: translateY(-50%);
+            z-index: 1;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                width: 185.95px;
+                height: 183.58px;
+                left: -100px;
+            }
+        }
+    }
+
+    .text-section-oss {
+        position: relative;
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: #333333;
+        line-height: 1.6;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            font-size: 1.125rem;
+        }
+    }
+
+    .oss-section {
+        position: relative;
+    }
+
+    .page-nav-block {
+        background: g.$grad-second;
+        border-radius: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 20px 10px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            padding: 30px 50px;
+        }
+        .page-nav-list {
+            .page-nav-list-item {
+                border-bottom: solid 1px #BCC2CB;
+                font-weight: 500;
+                font-size: 0.875rem;
+                color: #274374;
+                text-decoration: none;
+                display: block;
+                width: 100%;
+                padding: 15px 15px;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    font-size: 1.25rem;
+                    padding: 15px 0;
+                }
+                &:last-child {
+                    border-bottom: 0;
+                }
+
+                .font-sm {
+                    font-size: 0.625rem;
+                    font-weight: 400;
+                    @media (min-width: g.$desktop-breakpoint-md) {
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .page-nav-block-02 {
+        width: 100%;
+        box-sizing: border-box;
+
+        .page-nav-list {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 5px;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                grid-template-columns: repeat(3,1fr);
+                gap: 15px;
+            }
+            .page-nav-list-item {
+                border-radius: 10px;
+                background: g.$grad-second;
+                font-weight: 500;
+                font-size: 0.75rem;
+                color: #274374;
+                text-decoration: none;
+                display: block;
+                width: 100%;
+                padding: 15px 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                line-height: 1.3;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    font-size: 0.875rem;
+                    padding: 15px 0;
+                }
+                @media (min-width: g.$desktop-breakpoint-xl) {
+                    font-size: 1rem;
+                }
+
+            }
         }
     }
 }
