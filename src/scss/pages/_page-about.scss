@@ -421,7 +421,7 @@
                 @media (min-width: g.$desktop-breakpoint-md) {
                     width: 80px;
                     right: -35px;
-                    bottom: -20px;
+                    bottom: -40px;
                 }
 
                 svg {
@@ -433,6 +433,7 @@
             .aboutus-message__media-inner {
                 aspect-ratio: 708 / 579;
                 overflow: hidden;
+                border-radius: 10px;
                 img {
                     width: 100%;
                     height: 100%;
