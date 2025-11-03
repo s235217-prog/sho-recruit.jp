@@ -44,17 +44,27 @@
         bottom: 55px;
         left: 20px;
         width: 100%;
-        max-width: 260px;
-        border-bottom: solid 1px #254574;
         padding-bottom: 5px;
         @media (min-width: g.$desktop-breakpoint-md) {
-            max-width: 500px;
+            width: 100%;
             top: 45px;
             bottom: auto;
             left: 8%;
         }
-        @media (min-width: g.$desktop-breakpoint-md) {
-            max-width: 750px;
+
+        &:after {
+            content: "";
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 1px;
+            background-color: #254574;
+            max-width: 220.5px;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                max-width: 446.5px;
+            }
         }
     }
 

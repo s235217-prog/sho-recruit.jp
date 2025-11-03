@@ -44,14 +44,27 @@
         bottom: 55px;
         left: 20px;
         width: 100%;
-        max-width: 220px;
-        border-bottom: solid 1px #254574;
         padding-bottom: 5px;
         @media (min-width: g.$desktop-breakpoint-md) {
-            width: 446.5px;
+            width: 100%;
             top: 45px;
             bottom: auto;
             left: 8%;
+        }
+
+        &:after {
+            content: "";
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 1px;
+            background-color: #254574;
+            max-width: 220.5px;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                max-width: 446.5px;
+            }
         }
     }
 
@@ -67,7 +80,7 @@
             position: relative;
             line-height: 1;
             padding: 15px 15px 18px 0;
-            width: 86px;
+            width: auto;
             @media (min-width: g.$desktop-breakpoint-md) {
                 width: auto;
                 font-size: 1.125rem;
@@ -378,8 +391,12 @@
             width: 100%;
             box-sizing: border-box;
             @media (min-width: g.$desktop-breakpoint-md) {
-                width: 41%;
+                width: 50%;
                 padding-right: 40px;
+            }
+
+            @media (min-width: g.$desktop-breakpoint-lg) {
+                width: 41%;
             }
         }
 
@@ -390,8 +407,12 @@
             margin: 0 auto 20px;
             z-index: 2;
             @media (min-width: g.$desktop-breakpoint-md) {
-                width: 59%;
+                width: 50%;
                 margin: 0;
+            }
+
+            @media (min-width: g.$desktop-breakpoint-lg) {
+                width: 59%;
             }
 
             .aboutus-message__partscloss_01 {
@@ -518,21 +539,28 @@
             justify-content: flex-end;
             margin-top: 50px;
             flex-flow: column;
-            @media (min-width: g.$desktop-breakpoint-md) {
+            @media (min-width: g.$desktop-breakpoint-xl) {
                 margin-top: 0;
                 flex-flow: row;
+                margin-top: 15px;
             }
             .sign-company {
                 font-size: 0.875rem;
                 font-weight: 400;
+                line-height: 1;
                 @media (min-width: g.$desktop-breakpoint-md) {
                     font-size: 1.125rem;
+                    margin-bottom: 10px;
+                }
+                @media (min-width: g.$desktop-breakpoint-xl) {
+                    margin-bottom: 0;
                 }
             }
 
             .sign-name {
                 font-size: 1.125rem;
                 font-weight: 400;
+                line-height: 1;
                 @media (min-width: g.$desktop-breakpoint-md) {
                     font-size: 1.5rem;
                     margin-left: 1rem;
