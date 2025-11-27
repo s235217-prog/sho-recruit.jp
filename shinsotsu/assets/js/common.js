@@ -176,6 +176,10 @@
         nextEl: document.querySelector('.js-interview-next') || null,
         prevEl: document.querySelector('.js-interview-prev') || null
       },
+      mousewheel: {
+        enabled: false,
+        releaseOnEdges: false
+      },
       a11y: { enabled: true },
       keyboard: { enabled: true },
       breakpoints: {
@@ -449,7 +453,8 @@ window.addEventListener('load', function () {
       y: 0,
       duration: 0.5,
       ease: 'power2.out'
-    }, '>-0.05'); // 直前とほぼ連続で
+    //}, '>-0.05'); // 直前とほぼ連続で
+    }, '>-1.30'); // 先に文字の場合
   }
 
   // 3-3) 残りの見出しを上→下にマスク解除
@@ -458,13 +463,17 @@ window.addEventListener('load', function () {
       clipPath: 'inset(0 0 0% 0)',
       duration: 0.6,
       ease: 'power2.out'
-    }, '>-0.1'); // タイトル直後に重ね気味で
+    //}, '>-0.1'); // タイトル直後に重ね気味で
+    }, '>-0.3'); // 先に文字の場合
   }
 
   // 3-4) 残り要素をフェードイン（本文→動画→ボタン等）
-  tl.to('.p-intro__text',       { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '+=0.05')
-    .to('.p-intro__movie-wrap', { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '+=0.05')
-    .to('.p-intro__btn',        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '+=0.05');
+  //tl.to('.p-intro__text',       { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '+=0.05')
+  //  .to('.p-intro__movie-wrap', { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '+=0.05')
+  //  .to('.p-intro__btn',        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '+=0.05');
+  tl.to('.p-intro__text',       { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.6')
+    .to('.p-intro__movie-wrap', { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.6')
+    .to('.p-intro__btn',        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.6');
 });
 
 window.addEventListener('load', function () {
@@ -840,3 +849,10 @@ window.addEventListener('load', function () {
     }
   });
 })();
+
+//sessionStorage
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a.js-top-return');
+  if (!link) return;
+  sessionStorage.setItem('fromLowerToTop', '1');
+});
