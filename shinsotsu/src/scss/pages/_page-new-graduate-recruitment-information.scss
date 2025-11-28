@@ -433,6 +433,7 @@
                 line-height: 1.6;
                 display: flex;
                 align-items: center;
+                flex-wrap: wrap;
                 @media (min-width: g.$desktop-breakpoint-md) {
                     font-size: 1.25rem;
                     padding-left: 30px;
@@ -440,6 +441,15 @@
                 }
                 @media (min-width: g.$desktop-breakpoint-lg) {
                     font-size: 1.75rem;
+                }
+
+                .recruitment-flow-card-list-item-note {
+                    display: block;
+                    font-size:  0.75rem;
+                    width: 100%;
+                    @media (min-width: g.$desktop-breakpoint-lg) {
+                        font-size: 0.875rem;
+                    }
                 }
 
                 &:last-child {
@@ -456,12 +466,14 @@
                     background-repeat: no-repeat;
                     position: absolute;
                     left: 0;
-                    top: 50%;
+                    //top: 50%;
                     z-index: 2;
-                    transform: translateY(-50%);
+                    //transform: translateY(-50%);
+                    top: 1.4rem;
                     @media (min-width: g.$desktop-breakpoint-md) {
                         width: 17px;
                         height: 10px;
+                        top: 2.5rem;
                     }
                 }
 
