@@ -856,3 +856,33 @@ document.addEventListener('click', (e) => {
   if (!link) return;
   sessionStorage.setItem('fromLowerToTop', '1');
 });
+
+// === Interview Horizontal Scroll ===
+window.addEventListener('load', () => {
+  gsap.registerPlugin(ScrollTrigger);
+
+  const wrap = document.querySelector(".p-section--interview");   // セクション全体
+  const track = document.querySelector(".interview-inner-wrapper"); // 横並びの中身
+
+  if (!wrap || !track) return;
+
+  // 横幅計算
+  const scrollLength = track.scrollWidth - window.innerWidth;
+
+  // 初期位置
+  gsap.set(track, { x: 0 });
+
+  ScrollTrigger.create({
+    trigger: wrap,
+    //start: "top+=300 top+=150",
+    start: "top+=120 top+=150",
+    end: "+=" + scrollLength,
+    scrub: 0.5,
+    pin: true,
+    //markers: true, // → 動作確認用
+    animation: gsap.to(track, {
+      x: -scrollLength,
+      ease: "none"
+    })
+  });
+});

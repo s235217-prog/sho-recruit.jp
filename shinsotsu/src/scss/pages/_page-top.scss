@@ -9,6 +9,11 @@
 }
 #home {
     font-family: g.$font-noto-sans;
+
+    #main {
+        width: 100%;
+        overflow: hidden;
+    }
     //　イントロ
     .p-section--intro {
         position: relative;
@@ -567,6 +572,7 @@
         width: 100%;
         height: 100%;
         padding: 50px 0 90px;
+        overflow: hidden;
         @media (min-width: g.$desktop-breakpoint-md) {
             background-image: url(/shinsotsu/assets/img/top/interview_bg_section.svg);
             background-position: center bottom;
@@ -585,6 +591,9 @@
         @media (min-width: g.$desktop-breakpoint-md) {
             display: flex;
             align-items: flex-end;
+            margin-bottom: 0;
+        }
+        @media (min-width: g.$desktop-breakpoint-xll) {
             margin-bottom: 50px;
         }
     }
@@ -659,14 +668,39 @@
         position: relative;
         overflow: hidden;
         z-index: 5;
+        width: 100%;
+        
     }
 
     .p-interview {
         position: relative;
+    }
 
+    .interview-inner-wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 20px;
+        padding-left: 40vw;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            gap: 30px;
+            padding-left: 80vw;
+        }
+        
+    }
+
+    .p-interview__card-space {
+        width: 10vw;
+        background-color: transparent !important;
+        box-shadow: transparent !important;
+        pointer-events: none !important;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            width: 20vw;
+        }
     }
 
     .p-interview__card {
+
+        flex: 0 0 auto;
         background: #fff;
         border-radius: 12px;
         overflow: hidden;
@@ -691,7 +725,7 @@
             }
         }
     }
-
+    
     .p-interview.swiper {
         overflow: visible;
         //padding-left: 65px;
