@@ -683,7 +683,8 @@
         padding-left: 40vw;
         @media (min-width: g.$desktop-breakpoint-md) {
             gap: 30px;
-            padding-left: 80vw;
+            //padding-left: 80vw;
+            padding-left: 40vw;
         }
         
     }
@@ -693,8 +694,13 @@
         background-color: transparent !important;
         box-shadow: transparent !important;
         pointer-events: none !important;
+        z-index: -1;
+        position: relative;
         @media (min-width: g.$desktop-breakpoint-md) {
             width: 20vw;
+            &:hover {
+                box-shadow: transparent !important;
+            }
         }
     }
 
