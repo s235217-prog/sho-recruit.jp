@@ -368,22 +368,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
 window.addEventListener('load', function () {
   if (!window.gsap || !window.ScrollTrigger) return;
+
+  // イントロセクションと主要要素の存在チェック
+  const introSection = document.querySelector('.p-section--intro');
+  const introLead    = document.querySelector('.p-intro__lead');
+
+  // このページにイントロが無ければ、何もしない（→ エラー出さない）
+  if (!introSection || !introLead) return;
+  
   gsap.registerPlugin(ScrollTrigger);
 
   // 1) 「残りテキスト」をJSでラップ（.title-shosekkei-group の後ろ全部）
   (function wrapLeadRemainder() {
-    const lead = document.querySelector('.p-intro__lead');
-    if (!lead) return;
+    const lead  = introLead;
     const title = lead.querySelector('.title-shosekkei-group');
     if (!title) return;
 
-    // 既に作成済みなら何もしない
     if (lead.querySelector('.lead-rest')) return;
 
     const restWrapper = document.createElement('span');
     restWrapper.className = 'lead-rest';
 
-    // title の次の兄弟ノード以降をすべて lead-rest に移動
     let node = title.nextSibling;
     const buffer = [];
     while (node) {
@@ -406,9 +411,9 @@ window.addEventListener('load', function () {
   ];
 
   // 初期セット（FOUC対策）
-  const lead = document.querySelector('.p-intro__lead');
-  const title = document.querySelector('.p-intro__lead .title-shosekkei-group');
-  const rest  = document.querySelector('.p-intro__lead .lead-rest');
+  const lead  = introLead;
+  const title = lead.querySelector('.title-shosekkei-group');
+  const rest  = lead.querySelector('.lead-rest');
 
   if (lead)  gsap.set(lead,  { visibility: 'visible' });
   if (title) gsap.set(title, { opacity: 0, y: 0 });
@@ -419,13 +424,22 @@ window.addEventListener('load', function () {
     if (el) gsap.set(el, { y: '100vh', opacity: 0 });
   });
 
-  //gsap.set(['.p-intro__text', '.p-intro__movie-wrap', '.p-intro__btn'], { opacity: 0, y: 12 });
-  gsap.set(['.p-intro__text', '.p-intro__movie-wrap', '.p-intro__btn'], { opacity: 0, y: 0 });
+  const hasIntroSub =
+    document.querySelector('.p-intro__text') ||
+    document.querySelector('.p-intro__movie-wrap') ||
+    document.querySelector('.p-intro__btn');
+
+  if (hasIntroSub) {
+    gsap.set(
+      ['.p-intro__text', '.p-intro__movie-wrap', '.p-intro__btn'],
+      { opacity: 0, y: 0 }
+    );
+  }
 
   // 3) タイムライン：.p-section--intro で発火
   const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: '.p-section--intro',
+      trigger: introSection,      // ※ 文字列ではなく実体を渡す
       start: 'top 80%',
       toggleActions: 'play none none reverse',
       // markers: true,
@@ -439,11 +453,9 @@ window.addEventListener('load', function () {
     tl.to(el, {
       y: 0,
       opacity: 1,
-      //duration: 1.0,
       duration: 0.8,
       ease: 'power2.out'
-    //}, i * 0.25); // 着工の間隔
-      }, i * 0.15);
+    }, i * 0.15);
   });
 
   // 3-2) タイトル（英字）フェードイン
@@ -453,8 +465,7 @@ window.addEventListener('load', function () {
       y: 0,
       duration: 0.5,
       ease: 'power2.out'
-    //}, '>-0.05'); // 直前とほぼ連続で
-    }, '>-1.30'); // 先に文字の場合
+    }, '>-1.30');
   }
 
   // 3-3) 残りの見出しを上→下にマスク解除
@@ -463,17 +474,15 @@ window.addEventListener('load', function () {
       clipPath: 'inset(0 0 0% 0)',
       duration: 0.6,
       ease: 'power2.out'
-    //}, '>-0.1'); // タイトル直後に重ね気味で
-    }, '>-0.3'); // 先に文字の場合
+    }, '>-0.3');
   }
 
   // 3-4) 残り要素をフェードイン（本文→動画→ボタン等）
-  //tl.to('.p-intro__text',       { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '+=0.05')
-  //  .to('.p-intro__movie-wrap', { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '+=0.05')
-  //  .to('.p-intro__btn',        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '+=0.05');
-  tl.to('.p-intro__text',       { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.6')
-    .to('.p-intro__movie-wrap', { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.6')
-    .to('.p-intro__btn',        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.6');
+  if (hasIntroSub) {
+    tl.to('.p-intro__text',       { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.6')
+      .to('.p-intro__movie-wrap', { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '-=0.6')
+      .to('.p-intro__btn',        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.6');
+  }
 });
 
 window.addEventListener('load', function () {
