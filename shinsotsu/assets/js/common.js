@@ -102,58 +102,61 @@
   }
 
   // ========= 2) イントロ動画（ポスター切替） =========
-  function initIntroMovie(){
+  function initIntroMovie() {
     var wrap = document.querySelector('.p-intro__movie');
     if (!wrap) return;
 
-    var btn    = wrap.querySelector('.movie__poster');
+    var btn = wrap.querySelector('.movie__poster');
     if (!btn) return;
 
-    var mp4    = wrap.getAttribute('data-src');
-    var poster = wrap.getAttribute('data-poster') || '';
-    var title  = wrap.getAttribute('data-title')  || '動画';
+    var youtubeUrl = wrap.getAttribute('data-youtube');
+    var youtubeId = youtubeUrl.match(/embed\/([^?&]+)/)[1];
+    var title = wrap.getAttribute('data-title') || '動画';
+    var player;
 
-    function resetToPoster(v) {
-      if (v) {
-        v.pause();
-        v.removeAttribute('src');
-        var s = v.querySelector('source');
-        if (s) s.removeAttribute('src');
-        v.load();
-        v.remove();
+    // プレイヤー用の入れ物
+    var playerBox = wrap.querySelector('.p-intro__movie-player');
+    if (!playerBox) {
+      playerBox = document.createElement('div');
+      playerBox.className = 'p-intro__movie-player';
+      wrap.appendChild(playerBox);
+    }
+
+    function reset() {
+      if (player) {
+        player.destroy();
+        player = null;
       }
       wrap.classList.remove('is-playing');
+      btn.style.display = '';
       btn.focus();
     }
 
-    function play() {
-      if (!mp4 || wrap.querySelector('video')) return;
+    function playYoutube() {
+      if (player) return;
 
-      var v = document.createElement('video');
-      v.setAttribute('controls', 'controls');
-      v.setAttribute('playsinline', 'playsinline');
-      v.setAttribute('preload', 'metadata');
-      if (poster) v.setAttribute('poster', poster);
-      v.setAttribute('aria-label', title);
-
-      var src = document.createElement('source');
-      src.src  = mp4;
-      src.type = 'video/mp4';
-      v.appendChild(src);
-
-      wrap.appendChild(v);
       wrap.classList.add('is-playing');
+      btn.style.display = 'none';
 
-      // v.addEventListener('pause',  function(){ resetToPoster(v); });
-      v.addEventListener('ended', function(){ resetToPoster(v); });
-
-      var p = v.play();
-      if (p && typeof p.catch === 'function') p.catch(function(){});
+      player = new YT.Player(playerBox, {
+        videoId: youtubeId,
+        playerVars: {
+          autoplay: 1,
+          playsinline: 1
+        },
+        events: {
+          onStateChange: function (evt) {
+            if (evt.data === YT.PlayerState.ENDED) {
+              reset();
+            }
+          }
+        }
+      });
     }
 
-    btn.addEventListener('click',   function(e){ e.preventDefault(); play(); });
+    btn.addEventListener('click', function(e){ e.preventDefault(); playYoutube(); });
     btn.addEventListener('keydown', function(e){
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); playYoutube(); }
     });
   }
 
