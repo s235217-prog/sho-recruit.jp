@@ -769,8 +769,10 @@
         aspect-ratio: 217 / 142;
         object-fit: cover;
         margin-bottom: 30px;
+        max-width: 240px;
         @media (min-width: g.$desktop-breakpoint-md) {
             margin-bottom: 45px;
+            max-width: 290px;
         }
     }
 
