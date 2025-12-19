@@ -590,6 +590,9 @@
     }
   }
 
+  .dropdown-toggle {
+    cursor: pointer;
+  }
 }
 
 body:not(#home) {
