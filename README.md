@@ -2,6 +2,8 @@
 このリポジトリは **sho-recruit.jp.kzkicw.com**（Xserver）への公開用ソースを管理しています。  
 GitHub Actions を使って `develop` ブランチへの push で自動デプロイされます。
 
+運用に関しては１２３行目以降をご確認ください。
+
 ## 📦 プロジェクト構成
 /
 ├─ assets/
@@ -15,7 +17,7 @@ GitHub Actions を使って `develop` ブランチへの push で自動デプロ
 ├─ index.html
 └─ .github/workflows/develop.yml # 自動デプロイ設定
 
-## デプロイについて
+## デプロイについて ※開発環境のみの設定です。
 - `develop` ブランチに push すると、自動的に Xserver へ FTPS アップロードされます。  
 - Actions のワークフローは `.github/workflows/develop.yml` に定義されています。  
 - デプロイ先パス：  
@@ -50,6 +52,8 @@ GitHub Actions を使って `develop` ブランチへの push で自動デプロ
    - レビュー・マージ後、  
      GitHub Actions により **自動で Xserver にデプロイ** されます。
 
+4.　
+
 ## ブランチ命名ルール（例）
   feature/	新機能・改修・ページ追加など	feature/add-about-page, feature/update-header-style
   fix/	バグ修正	fix/sp-menu-toggle, fix/footer-link
@@ -65,6 +69,12 @@ URL	https://sho-recruit.jp.kzkicw.com/
   
 ## ステージングURL情報
 https://www.sho-recruit.jp/stg_shinsotsu/
+ユーザー名：sho
+パスワード：eE|s%9TGW^%Z
+
+  
+## 本番URL情報
+https://www.sho-recruit.jp/shinsotsu/
 ユーザー名：sho
 パスワード：eE|s%9TGW^%Z
   
@@ -110,3 +120,24 @@ assets/css/ は Git 管理外（CI が SCSS から生成し、サーバーへア
 必要に応じて、コンポーネント構成や命名ルールの提案も歓迎です。
 
 
+## 🎨 運用について
+## 📦 プロジェクト構成
+/
+├─ assets/
+│ ├─ css/ # SCSSコンパイル後のCSS（CIで生成・Git管理外）
+│ ├─ img/ # 画像
+│ └─ js/ # JavaScript
+├─ src/
+│ ├─ scss/ # ソース（ここを編集）
+│ └─ JS/ # ソース（ここを編集）
+├─ inc/ # HTMLの共通パーツ（ヘッダー/フッターなど）
+├─ 各個別HTML
+└─ index.html
+サーバーアップは
+assets
+inc
+各個別HTML
+index.html
+が対象となっております。
+srcは不要です。
+css は直接触らずscssを編集ください。
