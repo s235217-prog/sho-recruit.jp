@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "node -e \"const fs=require('fs'); if(!fs.existsSync('src/scss')){console.log('skip sass (no src/scss)'); process.exit(0)}\" && sass src/scss:assets/css --style=compressed --no-source-map"
+    "build": "node -e \"const fs=require('fs'); const {execSync}=require('child_process'); if(!fs.existsSync('src/scss')){console.log('skip sass (no src/scss)'); process.exit(0)} execSync('npx sass src/scss:assets/css --style=compressed --no-source-map',{stdio:'inherit'})\""
   },
   "devDependencies": {
     "sass": "^1.79.0"
