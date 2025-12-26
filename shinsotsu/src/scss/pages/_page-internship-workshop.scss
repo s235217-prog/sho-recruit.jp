@@ -1,0 +1,674 @@
+// 共通スタイル
+@use "../utils/variables" as g;
+@use "../utils/mixin" as m;
+
+//
+
+.p-section {
+
+}
+#internship-workshop {
+    font-family: g.$font-noto-sans;
+    color: #333333;
+    //background: linear-gradient(to bottom, rgba(#F5F6F8, 0) 0%, #F5F6F8 100%);
+    position: relative;
+    .l-main {
+        position: relative;
+        padding-top: 100px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            
+        }
+    }
+
+    //キービジュアル
+    .page-sub-hero {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+        height: 321px;
+        background-image: url(/shinsotsu/assets/img/internship-workshop/kv_sp.webp);
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            background-image: url(/shinsotsu/assets/img/internship-workshop/kv_pc.webp);
+            height: 314px;
+            background-position: right top;
+        }
+    }
+
+    .page-sub-hero__titlebox {
+        position: absolute;
+        z-index: 5;
+        bottom: 55px;
+        left: 20px;
+        width: 100%;
+        padding-bottom: 5px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            width: 100%;
+            top: 45px;
+            bottom: auto;
+            left: 8%;
+        }
+
+        &:after {
+            content: "";
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 1px;
+            background-color: #254574;
+            max-width: 220.5px;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                max-width: 446.5px;
+            }
+        }
+    }
+    .title-sub-page-sub-hero-headding {
+        display: inline-flex;
+        flex-flow: column;
+        position: relative;
+        .text-jp-hero {
+            display: inline-block;
+            font-weight: 500;
+            font-size: 0.75rem;
+            color: #333333;
+            position: relative;
+            line-height: 1;
+            padding: 15px 15px 18px 0;
+            width: auto;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                width: auto;
+                font-size: 1.125rem;
+                padding: 15px 15px 18px 0;
+            }
+
+            &:before,
+            &:after {
+                content: "";
+                background-color: #BCC2CB;
+                width: 26px;
+                height: 26px;
+                position: absolute;
+            }
+
+            &:before {
+                height: 1px;
+                bottom: 10px;
+                right: 0;
+            }
+
+            &:after {
+                width: 1px;
+                bottom: 5px;
+                right: 5px;
+            }
+
+        }
+
+        .text-en-hero {
+            display: block;
+            font-family: g.$font-public-sans;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 2.375rem;
+            color: #954802;
+            background: linear-gradient(76deg, #691902 0%, #954802 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            line-height: 1;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                font-size: 2.625rem;
+            }
+        }
+    }
+
+    .page-internship-workshop {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 100%;
+        position: relative;
+        margin-top: 60px;
+        margin-bottom: 60px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            margin-top: 130px;
+            margin-bottom: 130px;
+        }
+    }
+
+    .office-tour-intro__inner {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto 20px;
+        z-index: 2;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            max-width: 760px;
+        }
+
+        .office-tour-intro__partscloss_01 {
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 40px;
+            z-index: 2;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                width: 80px;
+                left: -10px;
+                top: 0;
+            }
+
+            svg {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+
+        .office-tour-intro__partscloss_02 {
+            position: absolute;
+            right: -10px;
+            bottom: 0;
+            width: 40px;
+            z-index: 5;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                width: 80px;
+                right: -10px;
+                bottom: 0;
+            }
+
+            svg {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+
+        .office-tour-intro-text {
+            font-size: 0.875rem;
+            font-weight: 500;
+            width: 100%;
+            text-align: center;
+            line-height: 1.6;
+            padding: 40px 10px;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                font-size: 1.25rem;
+                padding: 50px 30px;
+            }
+        }
+    }
+
+    .title-section-internship-workshop {
+        position: relative;
+        font-size: 1.0625rem;
+        font-weight: 700;
+        color: #274374;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            font-size: 2.375rem;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .text {
+            position: relative;
+            z-index: 3;
+        }
+
+        &:before {
+            content: "";
+            width: 40px;
+            height: 1px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color: #004668;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                width: 100px;
+                height: 2px;
+            }
+        }
+
+        &:after {
+            content: "";
+            background-image: url(/shinsotsu/assets/img/new-grads-roundtable/bg_title_contents_parts.webp);
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 101.29px;
+            height: 100px;
+            position: absolute;
+            left: -60px;
+            top: 5%;
+            transform: translateY(-50%);
+            z-index: 1;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                width: 185.95px;
+                height: 183.58px;
+                left: -100px;
+            }
+        }
+    }
+
+    .p-intern-card {
+        margin-bottom: 60px;
+        position: relative;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            margin-bottom: 60px;
+        }
+    }
+
+    .p-intern__head {
+        margin-bottom: 30px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            margin-bottom: 60px;
+        }
+        .p-internship-workshop__lead {
+            font-size: #333333;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                font-size: 1.5rem;
+            }
+        }
+
+        .p-internship-workshop__intro {
+            font-size: #333333;
+            font-size: 0.875rem;
+            font-weight: 400;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                font-size: 1.125rem;
+            }
+        }
+    }
+
+    .p-intern__points {
+        margin-bottom: 30px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            margin-bottom: 60px;
+        }
+
+        .p-internship-workshop-point {
+            margin-bottom: 20px;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                margin-bottom: 20px;
+            }
+
+            .p-intern-point__title {
+                font-size: #333333;
+                font-size: 1rem;
+                font-weight: 500;
+                margin-bottom: 10px;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    font-size: 1.25rem;
+                }
+            }
+
+            .p-intern-point__text {
+                font-size: #333333;
+                font-size: 0.875rem;
+                font-weight: 400;
+                margin-bottom: 10px;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    font-size: 1.125rem;
+                }
+            }
+        }
+    }
+
+    .p-intern__body {
+        .p-intern__body__text {
+            font-size: #333333;
+            font-size: 0.875rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                font-size: 1.125rem;
+            }
+        }
+    }
+
+    .p-intern-img-section {
+        width: 100%;
+        max-width: 1080px;
+        margin-left: auto;
+        margin-right: auto;
+
+        .intern-img-01 {
+            width: 100%;
+        }
+
+        .intern-img-bottom {
+            display: grid;
+            grid-template-columns: repeat(1,1fr);
+            @media (min-width: g.$desktop-breakpoint-md) {
+                grid-template-columns: repeat(1,1fr);
+            }
+        }
+
+        .p-intern-img__btn {
+            margin: 60px auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                margin: 70px auto 0;
+            }
+        }
+    }
+
+    .company-ctas {
+        position: relative;
+        padding: 40px 0;
+        margin-top: 40px;
+        background-color: #F5F6F8;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            padding: 120px 0;
+            margin-top: 120px;
+        }
+    }
+
+    .company-ctas-row {
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: 20px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            grid-template-columns: repeat(2,1fr);
+        }
+        .company-ctas__link {
+            transition: all .3s ease;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                &:hover {
+                opacity: 0.85; 
+                }
+            }
+        }
+    }
+
+    .photographs-section {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+        background: linear-gradient(to bottom right, #DDE8EF 0%, #EDEBE8 100%);
+        padding: 40px 0;
+        margin-top: 40px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            padding: 120px 0;
+            margin-top: 120px;
+        }
+    }
+
+    .title-photographs-heading {
+        margin-bottom: 30px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            margin-bottom: 40px;
+        }
+    }
+
+    .photographs-list {
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: 10px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            grid-template-columns: repeat(2,1fr);
+            gap: 20px;
+        }
+    }
+
+    .entry-form-section {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+        padding: 40px 0 0;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            padding: 120px 0 0;
+        }
+    }
+    
+
+    .title-entry-form-heading {
+        margin-bottom: 40px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            margin-bottom: 70px;
+        }
+    }
+
+    .entry-form-row {
+       display: flex;
+        flex-wrap: wrap;
+       .entry-form-detail {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 60px;
+        @media (min-width: g.$desktop-breakpoint-lg) {
+            width: 42%;
+            padding-right: 5%;
+            margin-bottom: 0;
+        }
+       }
+
+       .entry-form-input {
+        width: 100%;
+        @media (min-width: g.$desktop-breakpoint-lg) {
+            width: 58%;
+        }
+       }
+
+        
+
+        .entry-form-intro {
+            font-weight: 700;
+            color: #274374;
+            font-size: 1rem;
+            margin-bottom: 30px;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                font-size: 1.125rem;
+                margin-bottom: 40px;
+            }
+        }
+
+        .entry-form-list {
+            display: grid;
+            grid-template-columns: 1;
+            gap: 30px;
+            @media (min-width: g.$desktop-breakpoint-md) {
+                gap: 30px;
+            }
+        }
+        
+        .entry-form-badge {
+                    font-size: 1rem;
+                    font-weight: 400;
+                    background-color: #274374;
+                    border-radius: 5px;
+                    height: 30px;
+                    line-height: 1;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #ffffff;
+                    width: auto;
+                    margin: 0 auto;
+                    margin-bottom: 10px;
+                    padding: 3px 10px;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    font-size: 1rem;
+                    width: auto;
+                    height: 32px;
+                    margin: 0;
+                    margin-bottom: 15px;
+                }
+        }
+    }
+
+    .entry-form-badge-lead {
+        font-weight: 400;
+        font-size: 0.875rem;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            font-size: 1rem;
+        }
+    }
+
+    .entry-form-badge-text-01 {
+        font-weight: 400;
+        font-size: 0.875rem;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            font-size: 1rem;
+        }
+    }
+
+    .entry-form-badge-text-02 {
+        font-weight: 400;
+        font-size:  0.75rem;
+        color: #274374;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            font-size: 0.875rem;
+        }
+    }
+
+    .c-link-btn {
+        border-bottom: 1px solid #003C81;
+        width: 100%;
+        margin: 0 auto 0;
+        @media (min-width: 768px) {
+            margin: 0 auto 0;
+        }
+        .c-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+            padding: 10px 0;
+            text-decoration: none;
+            color: #274374;
+            line-height: 2;
+            font-weight: 700;
+            font-size: 1rem;
+            @media (min-width: 768px) {
+                padding: 15px 0;
+                font-size: 1rem;
+            }
+
+            &:focus-visible {
+            outline: 3px solid rgba(0,60,129,.25);
+            outline-offset: 2px;
+            border-radius: 6px;
+            }
+
+            &:hover {
+                //color: #012e61;
+            }
+
+            svg {
+                flex: 0 0 auto;
+                width: 19px;
+                height: 17px;
+                transition: transform .2s ease, opacity .2s ease;
+                path { stroke: currentColor; }
+            }
+
+            //&:hover svg { transform: translateX(3px); }
+            //&:active svg { transform: translateX(1px); }
+        }
+    }
+
+    .entry-form-noto-text {
+        font-weight: 400;
+        font-size: 0.875rem;
+        color: #274374;
+        margin-top: 15px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            font-size: 0.875rem;
+            margin-top: 15px;
+        }
+    }
+
+    // ------- タイトル部分（二重レイヤー方式） -------
+    .p-environment__title {
+        position: relative;
+        padding: 25px 50px 25px 0;
+        border-bottom: 1px solid #003C81;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font-size: 1rem;
+        font-weight: 700;
+        text-decoration: none;
+        color: #274374;
+        margin-top: 20px;
+        @media (min-width: g.$desktop-breakpoint-md) {
+            padding: 35px 60px 35px 0;
+            font-size: 1rem;
+        }
+
+        .p-environment-ico-arrow {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            z-index: 10;
+            transform: translateY(-50%);
+        }
+
+    }
+
+    .section-headers {
+        display: inline-flex;
+        flex-flow: column;
+        .text-en {
+                font-family: g.$font-public-sans;
+                font-size: 1rem;
+                font-style: italic;
+                font-weight: 500;
+                background: linear-gradient(81deg, #691902 0%, #954802 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                color: transparent;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    font-size: 1.25rem;
+                }
+            }
+
+            .text-jp {
+                font-size: 1.25rem;
+                font-weight: 500;
+                line-height: 1;
+                position: relative;
+                padding: 5px 15px 18px 0;
+                @media (min-width: g.$desktop-breakpoint-md) {
+                    font-size: 2.25rem;
+                }
+
+                &:before,
+                &:after {
+                    content: "";
+                    background-color: #BCC2CB;
+                    width: 26px;
+                    height: 26px;
+                    position: absolute;
+                }
+
+                &:before {
+                    height: 1px;
+                    bottom: 10px;
+                    right: 0;
+                }
+
+                &:after {
+                    width: 1px;
+                    bottom: 5px;
+                    right: 5px;
+                }
+            }
+    }
+}

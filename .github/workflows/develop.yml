@@ -1,0 +1,57 @@
+name: Deploy to Xserver (develop)
+
+on:
+  push:
+    branches: [ develop ]
+  workflow_dispatch: {}
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ★ SCSS→CSS ビルド（dart-sass 想定：package.json に "build": "sass src/scss:assets/css --style=compressed"）
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install & Build
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+            npm run build
+          else
+            echo "No package.json. Skipping build."
+          fi
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./
+          server-dir: ${{ secrets.FTP_TARGET }}
+          exclude: |
+            **/.git*
+            **/node_modules/**
+            **/.github/**
+            **/.DS_Store
+            **/src/**
+            **/*.map
+            **/*.psd
+            **/*.ai
+            **/*.sketch
+            **/*.fig
+            **/README.md
+            **/.gitattributes
+            **/.gitignore
+            **/*.mp4
+            **/*.mov
+            **/*.zip
