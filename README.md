@@ -63,3 +63,5 @@ https://www.sho-recruit.jp/shinsotsu/
 - JS（実装）：`assets/js/hero.js`
 
 新規スクリプトを追加した場合は、`inc/heroscript.html` に読み込みタグを追記してください。
+
+## プルリクエストtest
